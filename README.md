@@ -16,7 +16,9 @@ Click on the "Ask" button to receive responses based on the content of the PDF d
 
 The chat history is displayed in the main section, showing both user and bot messages.
 Code Overview
-The application is built using Streamlit, a Python library for creating web applications with minimal code. Here are some key components of the code:
+The application is built using Streamlit, a Python library for creating web applications with minimal code.
+
+# Here are some key components of the code:
 
 ## PDF Processing :
 
