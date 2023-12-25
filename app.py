@@ -1,4 +1,5 @@
 import streamlit as st
+import tiktoken
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from langchain.text_splitter import CharacterTextSplitter
@@ -32,19 +33,19 @@ def get_text_chunks(text):
 
 
 def get_vectorstore(text_chunks):
-    embeddings = OpenAIEmbeddings()
-    # embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
+    # embeddings = OpenAIEmbeddings(openai_api_key="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")
+    embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-xl")
     vectorstore = FAISS.from_texts(texts=text_chunks, embedding=embeddings)
     return vectorstore
 
 
 def get_conversation_chain(vectorstore):
-    llm = ChatOpenAI()
-#     llm = HuggingFaceHub(
-#     repo_id="google/flan-t5-xxl",
-#     model_kwargs={"temperature": 0.5, "max_length": 512},
-#     huggingfacehub_api_token="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"
-# )
+    #llm = ChatOpenAI()
+    llm = HuggingFaceHub(
+    repo_id="google/flan-t5-xxl",
+    model_kwargs={"temperature": 0.5, "max_length": 512},
+    huggingfacehub_api_token="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"
+)
 
 
     memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
